@@ -1,0 +1,36 @@
+---
+driver_plugin: ec2
+driver_config:
+  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  aws_ssh_key_id: <%= ENV['AWS_SSH_KEY_ID'] %>
+  ssh_key: <%= File.expand_path(ENV['AWS_SSH_KEY_FILE']) %>
+  region: us-east-1
+  availability_zone: us-east-1b
+  flavor_id: m1.small
+  groups:
+  - default
+  require_chef_omnibus: true
+platforms:
+- name: ubuntu-12.04
+  driver_config:
+    image_id: ami-7747d01e
+    username: ubuntu
+  run_list:
+  - recipe[apt]
+- name: ubuntu-10.04
+  driver_config:
+    image_id: ami-bffa6fd6
+    username: ubuntu
+  run_list:
+  - recipe[apt]
+- name: centos-6.3
+  driver_config:
+    image_id: ami-3689325f
+    username: root
+  run_list:
+  - recipe[yum::epel]
+suites:
+- name: default
+  run_list: ['recipe[MYCOOKBOOK::default]']
+  attributes: {}
