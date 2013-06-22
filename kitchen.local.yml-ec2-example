@@ -11,26 +11,23 @@ driver_config:
   groups:
   - default
   require_chef_omnibus: true
+
 platforms:
 - name: ubuntu-12.04
   driver_config:
-    image_id: ami-7747d01e
+    image_id: ami-cf5e2ba6
     username: ubuntu
   run_list:
   - recipe[apt]
+
 - name: ubuntu-10.04
   driver_config:
-    image_id: ami-bffa6fd6
+    image_id: ami-5323523a
     username: ubuntu
   run_list:
   - recipe[apt]
-- name: centos-6.3
+
+- name: centos-6
   driver_config:
-    image_id: ami-3689325f
+    image_id: ami-eb6b0182
     username: root
-  run_list:
-  - recipe[yum::epel]
-suites:
-- name: default
-  run_list: ['recipe[MYCOOKBOOK::default]']
-  attributes: {}
